@@ -2,26 +2,27 @@
 //the body height, and is universally expressed in units of kg/m2,
 //resulting from mass in kilograms and height in metres.
 
-const calculateBmi = (height: number, weight: number): string => {
-  const bmi = weight / (height * height);
+export const calculateBmi = (height: number, weight: number): string => {
+  const meters: number = height / 100;
+  const bmi = weight / (meters * meters);
   if (bmi >= 40) {
-    console.log(`Oh, you dead. Your BMI is: ${bmi}`);
+    return `Oh, you dead. Your BMI is: ${bmi}`;
   }
   if (bmi >= 30 && bmi < 40) {
-    console.log(`Obese. Your BMI is: ${bmi}`);
+    return `Obese. Your BMI is: ${bmi}`;
   }
   if (bmi >= 25 && bmi < 30) {
-    console.log(`Overweight. Your BMI is: ${bmi}`);
+    return `Overweight. Your BMI is: ${bmi}`;
   }
   if (bmi >= 18.5 && bmi < 25) {
-    console.log(`Normal. Your BMI is: ${bmi}`);
+    return `Normal. Your BMI is: ${bmi}`;
   }
   if (bmi < 18.5) {
-    console.log(`Skinny. Your BMI is: ${bmi}`);
+    return `Skinny. Your BMI is: ${bmi}`;
   }
-  return 'THIS IS A STRING';
+  return 'ERROR';
 };
-const height: number = Number(process.argv[2]);
-const weight: number = Number(process.argv[3]);
+// const height: number = Number(process.argv[2]);
+// const weight: number = Number(process.argv[3]);
 
-calculateBmi(height, weight);
+// calculateBmi(height, weight);
