@@ -1,0 +1,30 @@
+{
+  "name": "fullstack_open_part9",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ts-node": "ts-node",
+    "bmi": "ts-node bmiCalculator.ts",
+    "exercise": "ts-node exerciseCalculator.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zacsolo/FullStack_Open_Part9.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zacsolo/FullStack_Open_Part9/issues"
+  },
+  "homepage": "https://github.com/zacsolo/FullStack_Open_Part9#readme",
+  "devDependencies": {
+    "@types/node": "^14.6.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
