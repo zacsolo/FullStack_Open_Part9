@@ -1,8 +1,7 @@
 module.exports = {
     "env": {
         "node": true,
-        "browser": true,
-        "es2020": true
+        "es6": true
     },
     "extends": [
         "eslint:recommended",
@@ -11,13 +10,16 @@ module.exports = {
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": 11,
-        "sourceType": "module"
+        "project": "./tsconfig.json"
       },
     "plugins": [
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/no-explicit-any": 2
-    }
+        "@typescript-eslint/semi": ["error"],
+        "@typescript-eslint/no-explicit-any": 2,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+        "no-case-declarations": 0
+      }
 };

@@ -8,7 +8,7 @@ interface exTracker {
   averageTime: number;
 }
 
-const calculateExercises = (
+export const calculateExercises = (
   target: number,
   exArr: Array<number>
 ): exTracker => {
@@ -17,7 +17,7 @@ const calculateExercises = (
   const numOfTrainingDays: number = exArr.filter((day: number) => day !== 0)
     .length;
 
-  let total: number = 0;
+  let total = 0;
   exArr.map((num) => (total += num));
 
   const averageTime = total / numOfdays;
@@ -25,7 +25,7 @@ const calculateExercises = (
   const goalMet: boolean = averageTime > target ? true : false;
 
   let rating: number;
-  let description: string =
+  const description: string =
     averageTime >= target
       ? ((rating = 3), 'Goal Met')
       : averageTime > target * 0.5
@@ -52,8 +52,8 @@ const calculateExercises = (
   };
 };
 
-let exerciseDays: Array<number>;
-let newArr = process.argv;
+let exerciseDays: Array<number> = [];
+const newArr = process.argv;
 newArr.splice(0, 2);
 exerciseDays = newArr.map((num) => Number(num));
 
