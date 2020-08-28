@@ -3,9 +3,11 @@ import { Icon } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { apiBaseUrl } from '../constants';
-import { Patient } from '../types';
+import { Patient, Entry } from '../types';
 import { useStateValue } from '../state';
 import { setSinglePatient } from '../state/reducer';
+import EntryContainer from './EntryContainer';
+import AddEntryModal from '../AddEntryModal';
 
 interface ParamTypes {
   id: string;
@@ -14,6 +16,18 @@ interface ParamTypes {
 const SinglePatientPage: React.FC = () => {
   const { id } = useParams<ParamTypes>();
   const [{ singlePatient }, dispatch] = useStateValue();
+
+  const onSubmit = async (entry: Entry) => {
+    try {
+      await axios.post<Entry>(`${apiBaseUrl}/patients/${id}/entries`, entry);
+      const { data: patientData } = await axios.get<Patient>(
+        `${apiBaseUrl}/patients/${id}`
+      );
+      dispatch(setSinglePatient(patientData));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   useEffect(() => {
     const fetchSinglePatient = async (id: string) => {
@@ -27,7 +41,7 @@ const SinglePatientPage: React.FC = () => {
       }
     };
     fetchSinglePatient(id);
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   if (singlePatient) {
     return (
@@ -46,6 +60,22 @@ const SinglePatientPage: React.FC = () => {
           <p>ssn: {singlePatient.ssn}</p>
           <p>occupation: {singlePatient.occupation}</p>
         </div>
+        <div>
+          <h3>Entries</h3>
+          {singlePatient.entries.map((e) => (
+            <div
+              style={{
+                border: '1px solid grey',
+                marginTop: '5px',
+                marginBottom: '10px',
+                padding: '5px',
+              }}
+              key={e.id}>
+              <EntryContainer patient={e} />
+            </div>
+          ))}
+        </div>
+        <AddEntryModal onSubmit={onSubmit} />
       </div>
     );
   } else {
